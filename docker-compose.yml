@@ -1,0 +1,22 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "1337:1337"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/tye_db
+    depends_on:
+      - db
+
+  db:
+    build:
+      context: ./server/db
+      dockerfile: Dockerfile
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
