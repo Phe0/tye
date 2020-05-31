@@ -10,8 +10,7 @@ module.exports = {
     number: {
       type: "string",
       required: true,
-      minLength: 20,
-      maxLength: 20,
+      regex: /[0-9]{20}/,
     },
     cpf: {
       type: "string",
