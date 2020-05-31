@@ -1,11 +1,19 @@
 FROM node:latest
 
-WORKDIR /server
+RUN npm install -g sails
 
-COPY ./ ./
-
+COPY ./package.json /package.json
 RUN npm install
+RUN npm install --save sails-postgresql
 
-EXPOSE 1337
+COPY ./entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r//' /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-CMD ["node", "app.js"]
+COPY ./start-dev.sh /start-dev.sh
+RUN sed -i 's/\r//' /start-dev.sh
+RUN chmod +x /start-dev.sh
+
+WORKDIR /app
+
+ENTRYPOINT ["/entrypoint.sh"]

@@ -4,27 +4,28 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
+    command: /start-dev.sh
     ports:
       - "1337:1337"
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/tye_db
+      - POSTGRES_USER=test_project
+      - USE_DOCKER=yes
     depends_on:
-      - db
+      - postgres
+    volumes:
+      - .:/app
+    links:
+      - postgres
 
-  db:
-    build:
-      context: ./server/db
-      dockerfile: Dockerfile
-    ports:
-      - 5432:5432
+  postgres:
+    image: postgres
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=test_project
 
-  frontend:
-    stdin_open: true
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
+  # frontend:
+  #   stdin_open: true
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
