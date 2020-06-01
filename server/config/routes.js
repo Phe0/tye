@@ -9,5 +9,5 @@
  */
 
 module.exports.routes = {
-  "GET /": "LawyerController.hello",
+  "POST /api/user/login": "UserController.login",
 };
