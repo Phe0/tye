@@ -16,10 +16,18 @@ module.exports = {
     password: {
       type: "string",
       required: true,
-      encrypt: true,
     },
   },
   customToJSON: function () {
     return _.omit(this, ["password"]);
+  },
+  beforeCreate: function (valuesToSet, proced) {
+    sails.helpers
+      .hashPassword(valuesToSet.password)
+      .then((response) => {
+        valuesToSet.password = response;
+        return proced();
+      })
+      .catch((error) => proced(error));
   },
 };

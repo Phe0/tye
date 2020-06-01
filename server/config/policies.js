@@ -20,4 +20,8 @@ module.exports.policies = {
   UserController: {
     login: true,
   },
+  LawyerController: {
+    login: true,
+    create: true,
+  },
 };
