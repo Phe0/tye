@@ -19,4 +19,7 @@ module.exports = {
       encrypt: true,
     },
   },
+  customToJSON: function () {
+    return _.omit(this, ["password"]);
+  },
 };
