@@ -19,10 +19,10 @@ module.exports.policies = {
   "*": "is-auth",
   UserController: {
     login: true,
-    create: true,
+    signin: true,
   },
   LawyerController: {
     login: true,
-    create: true,
+    signin: true,
   },
 };

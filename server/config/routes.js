@@ -11,4 +11,6 @@
 module.exports.routes = {
   "POST /api/user/login": "UserController.login",
   "POST /api/lawyer/login": "LawyerController.login",
+  "POST /api/user/signin": "UserController.signin",
+  "POST /api/lawyer/signin": "LawyerController.signin",
 };
