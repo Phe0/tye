@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
       let credentials = parts[1];
       if (/^Bearer$/i.test(scheme)) {
         jwt.verify(credentials, "probono", (error, decoded) => {
-          if (err) {
+          if (error) {
             return res.status(401).json(error);
           }
           req.user = decoded;
