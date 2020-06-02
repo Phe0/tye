@@ -26,4 +26,15 @@ module.exports = {
         return res.status(401).json({ error: "Usuário não encontrado" });
       });
   },
+  signin: function (req, res) {
+    User.create(req.body)
+      .fetch()
+      .then((user) => {
+        const token = jwt.sign(user.toJSON(), "probono");
+        return res.status(200).json({
+          token,
+        });
+      })
+      .catch((error) => res.status(400).json(error));
+  },
 };
