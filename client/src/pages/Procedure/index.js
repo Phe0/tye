@@ -1,12 +1,6 @@
 import React from "react";
-import SearchInput from "../../components/SearchInput";
-import NewButton from "../../components/NewButton";
+import Header from "../../components/Header";
 
 export default function Procedures() {
-  return (
-    <div>
-      <SearchInput placeholder="Procure um processo..." />
-      <NewButton to="#" />
-    </div>
-  );
+  return <Header />;
 }

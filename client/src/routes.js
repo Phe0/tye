@@ -7,6 +7,8 @@ export default function Routes() {
     <Router>
       <Switch>
         <Route exact path="/" component={Procedures} />
+        <Route exact path="/rules" component={Procedures} />
+        <Route exact path="/procedures" component={Procedures} />
       </Switch>
     </Router>
   );
