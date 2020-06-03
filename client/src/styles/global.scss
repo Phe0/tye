@@ -85,3 +85,14 @@ html {
   color: $secondaryText;
   margin-bottom: 24px;
 }
+
+.back {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  & h1 {
+    margin: 0;
+    margin-left: 12px;
+  }
+}

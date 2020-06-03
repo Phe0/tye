@@ -124,7 +124,7 @@ export default function Procedures() {
         <article className="intro">
           <h1>Regras</h1>
           <div className="intro__actions">
-            <SearchInput placeholder="Procure uma regra..." />
+            <SearchInput placeholder="Procure uma regra" />
             <NewButton />
           </div>
         </article>
