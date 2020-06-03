@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import SearchInput from "../../components/SearchInput";
 import NewButton from "../../components/NewButton";
 import BackIcon from "../../assets/backIcon";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProgressCard from "../../components/ProgressCard";
 
 const progresses = [
@@ -52,21 +52,21 @@ const progresses = [
 ];
 
 export default function Procedure() {
-  const number = "1234567890123456789";
+  const { number } = useParams();
   return (
     <div className="container">
       <Header />
       <main>
         <article className="intro">
           <Link to="/procedures" style={{ textDecoration: "none" }}>
-            <div class="back">
+            <div className="back">
               <BackIcon color="#DAF5E7" />
               <h1>Andamentos</h1>
             </div>
           </Link>
           <div className="intro__actions">
             <SearchInput placeholder="Procure um andamento" />
-            <NewButton />
+            <NewButton to={`/new-progress/${number}`} />
           </div>
         </article>
         <p className="explanation bold">{number}</p>
