@@ -8,6 +8,9 @@
 }
 
 .navigation {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
   &__button {
     font-family: $main;
     font-size: 18px;
@@ -19,6 +22,7 @@
     border-radius: 16px;
     padding: 6px 24px;
     margin-left: 24px;
+    margin-bottom: 12px;
     cursor: pointer;
   }
 }

@@ -15,10 +15,23 @@ p {
   font-size: 14px;
 }
 
+h1 {
+  font-size: 48px;
+  color: $textColor;
+  margin: 0;
+}
+
 .bigger {
   transition: all 0.2s;
   &:hover {
     transform: scale(1.1);
+  }
+}
+
+.translate {
+  transition: all 0.2s;
+  &:hover {
+    transform: translateY(-10px);
   }
 }
 
@@ -28,4 +41,41 @@ p {
 
 html {
   background-color: $background;
+}
+
+.container {
+  margin: auto;
+  width: 80vw;
+}
+
+.intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  margin-top: 36px;
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    max-width: 256px;
+    margin-bottom: 12px;
+  }
+
+  & h1 {
+    margin-bottom: 12px;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $folderColor;
+  border-radius: 5px;
 }

@@ -2,6 +2,7 @@
 
 .folder {
   display: inline-block;
+  margin-bottom: 16px;
   &__tag {
     background-color: $folderColor;
     width: 52px;

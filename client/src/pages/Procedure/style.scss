@@ -1,0 +1,12 @@
+.folders {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 212px);
+  gap: 10px;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  .folders {
+    justify-content: center;
+  }
+}
