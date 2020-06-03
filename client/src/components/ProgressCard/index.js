@@ -7,8 +7,8 @@ export default function ProgressCard({ date, hour, description }) {
     <Link to="#" style={{ textDecoration: "none" }}>
       <article className="progress-card bigger">
         <div className="time-section">
-          <p>{date}</p>
-          <p>{hour}</p>
+          <p className="bold">{date}</p>
+          <p className="bold">{hour}</p>
         </div>
         <p className="progress-card__description">{description}</p>
       </article>

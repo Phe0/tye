@@ -8,8 +8,8 @@ export default function ProcedureFolder({ number, cpf, id }) {
       <article className="folder bigger">
         <div className="folder__tag"></div>
         <div className="folder__content">
-          <p>{number}</p>
-          <p>{cpf}</p>
+          <p className="bold">{number}</p>
+          <p className="bold">{cpf}</p>
         </div>
       </article>
     </Link>
