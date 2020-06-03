@@ -78,6 +78,7 @@ export default function Procedure() {
               hour={progress.hour}
               description={progress.description}
               id={progress.id}
+              number={number}
             />
           ))}
         </section>

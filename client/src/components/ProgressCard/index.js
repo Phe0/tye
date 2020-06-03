@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
 
-export default function ProgressCard({ date, hour, description, id }) {
+export default function ProgressCard({ date, hour, description, id, number }) {
   return (
-    <Link to={`/progress/${id}`} style={{ textDecoration: "none" }}>
+    <Link to={`/progress/${number}/${id}`} style={{ textDecoration: "none" }}>
       <article className="progress-card bigger">
         <div className="time-section">
           <p className="bold">{date}</p>
