@@ -7,8 +7,13 @@
   border-radius: 5px;
   background-color: $folderColor;
   overflow: hidden;
+  margin-bottom: 16px;
 
   & section {
     margin-bottom: 16px;
   }
+}
+
+p {
+  color: $background;
 }

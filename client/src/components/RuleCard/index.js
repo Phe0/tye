@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
 
-export default function ProgressCard({ from, to }) {
+export default function ProgressCard({ from, to, id }) {
   return (
-    <Link to="#" style={{ textDecoration: "none" }}>
+    <Link to={`/rule/${id}`} style={{ textDecoration: "none" }}>
       <article className="rule-card bigger">
         <section>
           <p className="bold">De:</p>

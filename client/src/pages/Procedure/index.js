@@ -147,7 +147,7 @@ export default function Procedures() {
   return (
     <div className="container">
       <Header />
-      <section>
+      <main>
         <article className="intro">
           <h1>Processos</h1>
           <div className="intro__actions">
@@ -165,7 +165,7 @@ export default function Procedures() {
             />
           ))}
         </section>
-      </section>
+      </main>
     </div>
   );
 }
