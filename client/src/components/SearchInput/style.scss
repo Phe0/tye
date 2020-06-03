@@ -1,0 +1,29 @@
+@import "../../styles/colors.scss";
+@import "../../styles/font.scss";
+
+.search {
+  background-color: $folderColor;
+  width: 220px;
+  height: 32px;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+
+  &__input {
+    background-color: transparent;
+    border: none;
+    margin-left: 8px;
+    font-size: 14px;
+
+    &::placeholder {
+      color: $background;
+      font-family: $main;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
