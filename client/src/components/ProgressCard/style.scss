@@ -1,0 +1,33 @@
+@import "../../styles/colors.scss";
+
+.progress-card {
+  width: 192px;
+  height: 224px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: $folderColor;
+
+  display: flex;
+  flex-direction: column;
+
+  &__description {
+    flex: 1;
+    text-align: justify;
+    overflow: hidden;
+  }
+}
+
+.time-section {
+  display: flex;
+  justify-content: space-between;
+
+  & p {
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+}
+
+p {
+  color: $background;
+  margin: 0;
+}
