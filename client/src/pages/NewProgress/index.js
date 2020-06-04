@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header";
 import BackIcon from "../../assets/backIcon";
 import { Link, useParams } from "react-router-dom";
 
 export default function NewProgress() {
   const { number } = useParams();
+  const [description, setDescription] = useState("");
+
+  function handleChange(event) {
+    setDescription(event.target.value);
+  }
+
+  function saveProgress() {
+    const progress = {
+      procedure: number,
+      description,
+    };
+  }
+
   return (
     <div className="container">
       <Header />
@@ -17,10 +30,15 @@ export default function NewProgress() {
             </div>
           </Link>
           <div className="intro__actions">
-            <button className="save-btn bold bigger">Salvar</button>
+            <button onClick={handleChange} className="save-btn bold bigger">
+              Salvar
+            </button>
           </div>
         </article>
-        <section></section>
+        <article className="rule__input-area">
+          <h3 className="bold">Descrição</h3>
+          <textarea value={description} onChange={handleChange} />
+        </article>
       </main>
     </div>
   );
