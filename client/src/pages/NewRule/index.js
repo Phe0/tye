@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 import BackIcon from "../../assets/backIcon";
-import toRegex from "../../utils/toRegex";
+import { toRegex } from "../../utils/translation";
 import "./style.scss";
 
 export default function NewRule() {
@@ -35,12 +35,14 @@ export default function NewRule() {
       alert(
         "Os campos devem ser preenchidos para que você possa salvar uma nova regra."
       );
+    } else {
+      const rule = {
+        from: from,
+        regex: toRegex(from),
+        to: to,
+      };
+      console.log(rule);
     }
-    const rule = {
-      from: from,
-      regex: toRegex(from),
-      to: to,
-    };
   }
 
   return (

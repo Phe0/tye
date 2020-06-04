@@ -1,3 +1,6 @@
+@import "../../styles/colors.scss";
+@import "../../styles/font.scss";
+
 .date-hour {
   display: flex;
 
@@ -10,4 +13,20 @@
 
 .description {
   font-size: 18px;
+}
+
+.btn {
+  border: none;
+  height: 32px;
+  background-color: transparent;
+  font-size: 16px;
+  color: $textColor;
+  border-radius: 16px;
+  padding: 0 16px;
+  margin: 0 16px 16px 0;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: $secondaryBackground;
 }
