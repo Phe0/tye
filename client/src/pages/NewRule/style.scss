@@ -19,6 +19,17 @@
     & textarea {
       height: 160px;
     }
+
+    & input {
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-family: $main;
+      color: $background;
+      background-color: $folderColor;
+    }
   }
 }
 
