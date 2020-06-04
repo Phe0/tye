@@ -53,7 +53,7 @@ export default function NewRule() {
           <Link to={`/rules`} style={{ textDecoration: "none" }}>
             <div className="back">
               <BackIcon color="#DAF5E7" />
-              <h1>Regra</h1>
+              <h1>Nova Regra</h1>
             </div>
           </Link>
           <div className="intro__actions">

@@ -1,0 +1,21 @@
+@import "../../styles/colors.scss";
+@import "../../styles/font.scss";
+
+.rule {
+  &__show {
+    & h3 {
+      color: $textColor;
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    & p {
+      background-color: $folderColor;
+      color: $background;
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 5px;
+      line-height: 22px;
+    }
+  }
+}

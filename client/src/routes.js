@@ -7,6 +7,7 @@ import Rules from "./pages/Rules";
 import Progress from "./pages/Progress";
 import NewProcedure from "./pages/NewProcedure";
 import NewRule from "./pages/NewRule";
+import Rule from "./pages/Rule";
 
 export default function Routes() {
   return (
@@ -20,6 +21,7 @@ export default function Routes() {
         <Route path="/progress/:number/:id" component={Progress} />
         <Route path="/new-procedure" component={NewProcedure} />
         <Route path="/new-rule" component={NewRule} />
+        <Route path="/rule/:id" component={Rule} />
       </Switch>
     </Router>
   );
