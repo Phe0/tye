@@ -1,0 +1,44 @@
+@import "../../styles/colors.scss";
+@import "../../styles/font.scss";
+
+.rule {
+  &__form {
+  }
+  &__input-area {
+    & h3 {
+      color: $textColor;
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+    & p {
+      color: $secondaryText;
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    & textarea {
+      height: 160px;
+    }
+  }
+}
+
+.variables {
+  &__area {
+    background-color: $folderColor;
+    padding: 18px 10px;
+    border-radius: 5px;
+  }
+
+  &__selector {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: $main;
+    font-size: 16px;
+    color: $background;
+    background-color: $logoColor;
+    padding: 1px 8px;
+    border-radius: 2px;
+    margin-right: 16px;
+  }
+}

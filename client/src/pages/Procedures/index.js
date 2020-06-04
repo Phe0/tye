@@ -152,7 +152,7 @@ export default function Procedures() {
           <h1>Processos</h1>
           <div className="intro__actions">
             <SearchInput placeholder="Procure um processo" />
-            <NewButton />
+            <NewButton to="/new-procedure" />
           </div>
         </article>
         <section className="folders">
