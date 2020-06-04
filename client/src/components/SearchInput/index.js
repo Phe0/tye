@@ -5,7 +5,7 @@ import "./style.scss";
 export default function SearchInput({ placeholder, value, onChange }) {
   return (
     <section className="search">
-      <SearchIcon color="#2b3831" />
+      <SearchIcon color="#1C2420" />
       <input
         className="search__input"
         type="text"

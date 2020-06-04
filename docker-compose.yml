@@ -8,10 +8,10 @@ services:
       - "1337:1337"
     volumes:
       - .:/server
-  # frontend:
-  #   stdin_open: true
-  #   build:
-  #     context: ./client
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 3000:3000
+  frontend:
+    stdin_open: true
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
