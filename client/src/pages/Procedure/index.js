@@ -62,24 +62,23 @@ export default function Procedure() {
           </div>
         </article>
         <p className="explanation bold">{number}</p>
-        {progresses.length &&
-          (filtered.length ? (
-            <section className="folders">
-              {filtered.map((progress, index) => (
-                <ProgressCard
-                  key={index}
-                  date={parseDate(progress.createdAt)}
-                  hour={parseHour(progress.createdAt)}
-                  description={progress.description}
-                  procedureId={id}
-                  id={progress.id}
-                  number={number}
-                />
-              ))}
-            </section>
-          ) : (
-            <Empty label="Nenhum andamento encontrado para esse processo" />
-          ))}
+        {filtered.length ? (
+          <section className="folders">
+            {filtered.map((progress, index) => (
+              <ProgressCard
+                key={index}
+                date={parseDate(progress.createdAt)}
+                hour={parseHour(progress.createdAt)}
+                description={progress.description}
+                procedureId={id}
+                id={progress.id}
+                number={number}
+              />
+            ))}
+          </section>
+        ) : (
+          <Empty label="Nenhum andamento encontrado para esse processo" />
+        )}
       </main>
     </div>
   );

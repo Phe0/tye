@@ -69,6 +69,29 @@ html {
   }
 }
 
+@media (max-width: 800px) {
+  .intro {
+    flex-direction: column;
+
+    &__actions {
+      margin-top: 24px;
+      width: 100%;
+
+      & button {
+        width: 100%;
+      }
+    }
+
+    & a {
+      & .back {
+        & h1 {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
@@ -84,6 +107,12 @@ html {
   font-size: 16px;
   color: $secondaryText;
   margin-bottom: 24px;
+}
+
+@media (max-width: 800px) {
+  .explanation {
+    text-align: center;
+  }
 }
 
 .back {
