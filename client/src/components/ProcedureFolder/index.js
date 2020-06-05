@@ -4,7 +4,7 @@ import "./style.scss";
 
 export default function ProcedureFolder({ number, cpf, id }) {
   return (
-    <Link to={`/procedure/${id}`} style={{ textDecoration: "none" }}>
+    <Link to={`/procedure/${number}/${id}`} style={{ textDecoration: "none" }}>
       <article className="folder translate">
         <div className="folder__tag"></div>
         <div className="folder__content">

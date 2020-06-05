@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import BackIcon from "../../assets/backIcon";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import InputMask from "react-input-mask";
 import proceduresService from "../../services/Procedures";
 import regex from "../../utils/regex";

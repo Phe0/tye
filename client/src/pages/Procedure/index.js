@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import SearchInput from "../../components/SearchInput";
 import NewButton from "../../components/NewButton";
@@ -6,57 +6,28 @@ import BackIcon from "../../assets/backIcon";
 import { Link, useParams } from "react-router-dom";
 import searchFunction from "../../utils/search";
 import ProgressCard from "../../components/ProgressCard";
-
-const progressesTest = [
-  {
-    id: 1,
-    date: "01/02/2020",
-    hour: "16:30",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ornare leo. Praesent aliquet dignissim laoreet. Sed finibus lobortis vulputate. Duis vehicula ipsum at egestas rutr",
-  },
-  {
-    id: 1,
-    date: "01/02/2020",
-    hour: "16:30",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ornare leo. Praesent aliquet dignissim laoreet. Sed finibus lobortis vulputate. Duis vehicula ipsum at egestas rutr",
-  },
-  {
-    id: 1,
-    date: "01/02/2020",
-    hour: "16:30",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ornare leo. Praesent aliquet dignissim laoreet. Sed finibus lobortis vulputate. Duis vehicula ipsum at egestas rutr",
-  },
-  {
-    id: 1,
-    date: "01/02/2020",
-    hour: "16:30",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ornare leo. Praesent aliquet dignissim laoreet. Sed finibus lobortis vulputate. Duis vehicula ipsum at egestas rutr",
-  },
-  {
-    id: 1,
-    date: "01/02/2020",
-    hour: "16:30",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ornare leo. Praesent aliquet dignissim laoreet. Sed finibus lobortis vulputate. Duis vehicula ipsum at egestas rutr",
-  },
-  {
-    id: 1,
-    date: "01/02/2020",
-    hour: "16:30",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ornare leo. Praesent aliquet dignissim laoreet. Sed finibus lobortis vulputate. Duis vehicula ipsum at egestas rutr",
-  },
-];
+import progressService from "../../services/Progress";
 
 export default function Procedure() {
-  const { number } = useParams();
+  const { number, id } = useParams();
   const [search, setSearch] = useState("");
-  const [progresses, setProgresses] = useState(progressesTest);
-  const [filtered, setFiltered] = useState(progressesTest);
+  const [progresses, setProgresses] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+
+  useEffect(() => {
+    getProgress();
+  }, []);
+
+  async function getProgress() {
+    const progressArray = await progressService.getByProcedure(id);
+    progressArray.sort((a, b) => {
+      if (a.createdAt > b.createdAt) return -1;
+      if (a.createdAt < b.createdAt) return 1;
+      return 0;
+    });
+    setProgresses(progressArray);
+    setFiltered(progressArray);
+  }
 
   function handleChange(event) {
     setSearch(event.target.value);
@@ -66,6 +37,19 @@ export default function Procedure() {
       event.target.value
     );
     setFiltered(filteredProcedures);
+  }
+
+  function parseDate(date) {
+    date = new Date(date);
+    return `${("0" + date.getDate()).slice(-2)}/${(
+      "0" +
+      (date.getMonth() + 1)
+    ).slice(-2)}/${date.getFullYear()}`;
+  }
+
+  function parseHour(date) {
+    date = new Date(date);
+    return `${date.getHours()}:${date.getMinutes()}`;
   }
 
   return (
@@ -85,7 +69,7 @@ export default function Procedure() {
               onChange={handleChange}
               placeholder="Procure um andamento"
             />
-            <NewButton to={`/new-progress/${number}`} />
+            <NewButton to={`/new-progress/${number}/${id}`} />
           </div>
         </article>
         <p className="explanation bold">{number}</p>
@@ -93,8 +77,8 @@ export default function Procedure() {
           {filtered.map((progress, index) => (
             <ProgressCard
               key={index}
-              date={progress.date}
-              hour={progress.hour}
+              date={parseDate(progress.createdAt)}
+              hour={parseHour(progress.createdAt)}
               description={progress.description}
               id={progress.id}
               number={number}
