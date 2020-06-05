@@ -7,6 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import searchFunction from "../../utils/search";
 import ProgressCard from "../../components/ProgressCard";
 import progressService from "../../services/Progress";
+import { parseDate, parseHour } from "../../utils/parseTime";
 
 export default function Procedure() {
   const { number, id } = useParams();
@@ -33,23 +34,10 @@ export default function Procedure() {
     setSearch(event.target.value);
     const filteredProcedures = searchFunction(
       progresses,
-      ["date", "hour", "description"],
+      ["description"],
       event.target.value
     );
     setFiltered(filteredProcedures);
-  }
-
-  function parseDate(date) {
-    date = new Date(date);
-    return `${("0" + date.getDate()).slice(-2)}/${(
-      "0" +
-      (date.getMonth() + 1)
-    ).slice(-2)}/${date.getFullYear()}`;
-  }
-
-  function parseHour(date) {
-    date = new Date(date);
-    return `${date.getHours()}:${date.getMinutes()}`;
   }
 
   return (
@@ -80,6 +68,7 @@ export default function Procedure() {
               date={parseDate(progress.createdAt)}
               hour={parseHour(progress.createdAt)}
               description={progress.description}
+              procedureId={id}
               id={progress.id}
               number={number}
             />

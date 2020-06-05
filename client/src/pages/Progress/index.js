@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import BackIcon from "../../assets/backIcon";
 import { Link, useParams } from "react-router-dom";
+import progressService from "../../services/Progress";
 import "./style.scss";
 
 import { translate, findExpressions } from "../../utils/translation";
+import { parsedate, parseHour, parseDate } from "../../utils/parseTime";
 
 const rules = [
   {
@@ -23,27 +25,34 @@ const rules = [
   },
 ];
 
-const description =
-  "Audiência conciliação designada - 01/02/2020 08:30 Audiência instrução e julgamento designada - 10/12/2012 16:30 Audiência conciliação designada - 02/02/2020 08:00 Audiência instrução e julgamento designada - 11/12/2012 16:00";
+// const description =
+//   "Audiência conciliação designada - 01/02/2020 08:30 Audiência instrução e julgamento designada - 10/12/2012 16:30 Audiência conciliação designada - 02/02/2020 08:00 Audiência instrução e julgamento designada - 11/12/2012 16:00";
 
 export default function Progress() {
+  const [progress, setProgress] = useState();
   const [translation, setTranslation] = useState(null);
   const [translatedSelected, setTranslatedSelected] = useState(true);
-  const { number } = useParams();
-  const date = "01/02/2020";
-  const hour = "16:30";
+  const { number, procedureId, id } = useParams();
 
   useEffect(() => {
-    const expressions = findExpressions(description, rules);
-    let translatedText = description;
+    setPage();
+  }, []);
+
+  async function setPage() {
+    const progress = await progressService.getById(id);
+    setProgress(progress);
+    const expressions = findExpressions(progress.description, rules);
+    let translatedText = progress.description;
     const translations = [];
     expressions.forEach((expression) => {
-      expression.expressions.forEach((foundText) => {
-        translations.push({
-          original: foundText,
-          translated: translate(foundText, expression.rule),
+      if (expression.expressions) {
+        expression.expressions.forEach((foundText) => {
+          translations.push({
+            original: foundText,
+            translated: translate(foundText, expression.rule),
+          });
         });
-      });
+      }
     });
     translations.forEach((translation) => {
       translatedText = translatedText.replace(
@@ -52,14 +61,17 @@ export default function Progress() {
       );
     });
     setTranslation(translatedText);
-  }, []);
+  }
 
   return (
     <div className="container">
       <Header />
       <main>
         <article className="intro">
-          <Link to={`/procedure/${number}`} style={{ textDecoration: "none" }}>
+          <Link
+            to={`/procedure/${number}/${procedureId}`}
+            style={{ textDecoration: "none" }}
+          >
             <div className="back">
               <BackIcon color="#DAF5E7" />
               <h1>Andamento</h1>
@@ -80,15 +92,17 @@ export default function Progress() {
             Original
           </button>
         </div>
-        <section className="show-text">
-          <div className="date-hour">
-            <p className="bold">{date}</p>
-            <p className="bold">{hour}</p>
-          </div>
-          <p className="description">
-            {translatedSelected ? translation : description}
-          </p>
-        </section>
+        {progress && (
+          <section className="show-text">
+            <div className="date-hour">
+              <p className="bold">{parseDate(progress.createdAt)}</p>
+              <p className="bold">{parseHour(progress.createdAt)}</p>
+            </div>
+            <p className="description">
+              {translatedSelected ? translation : progress.description}
+            </p>
+          </section>
+        )}
       </main>
     </div>
   );

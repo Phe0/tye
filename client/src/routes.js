@@ -18,7 +18,7 @@ export default function Routes() {
         <Route exact path="/procedures" component={Procedures} />
         <Route path="/procedure/:number/:id" component={Procedure} />
         <Route path="/new-progress/:number/:id" component={NewProgress} />
-        <Route path="/progress/:number/:id" component={Progress} />
+        <Route path="/progress/:number/:procedureId/:id" component={Progress} />
         <Route path="/new-procedure" component={NewProcedure} />
         <Route path="/new-rule" component={NewRule} />
         <Route path="/rule/:id" component={Rule} />
