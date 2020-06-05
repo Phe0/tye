@@ -24,7 +24,7 @@ export default function NewProcedure() {
   async function saveProcedure() {
     if (
       procedureNumber.match(regex.number) &&
-      cpf.match(regex.cpf) &&
+      cpf.match(regex.cpfLiteral) &&
       validateCPF(cpf)
     ) {
       const token = localStorage.getItem("accessToken");

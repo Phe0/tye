@@ -93,10 +93,16 @@ export default function NewRule() {
                 HORA
               </button>
               <button
-                onClick={() => insertVariable("name")}
+                onClick={() => insertVariable("cpf")}
                 className="variables__selector bold bigger"
               >
-                NOME
+                CPF
+              </button>
+              <button
+                onClick={() => insertVariable("cnpj")}
+                className="variables__selector bold bigger"
+              >
+                CNPJ
               </button>
             </div>
           </article>
