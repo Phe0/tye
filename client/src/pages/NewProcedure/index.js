@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import BackIcon from "../../assets/backIcon";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import InputMask from "react-input-mask";
+import proceduresService from "../../services/Procedures";
+import regex from "../../utils/regex";
+import validateCPF from "../../utils/cpfValidator";
+import decodeJWT from "../../utils/decodeJWT";
 
 export default function NewProcedure() {
-  const { number } = useParams();
+  const history = useHistory();
   const [cpf, setCpf] = useState("");
   const [procedureNumber, setProcedureNumber] = useState("");
 
@@ -17,11 +21,28 @@ export default function NewProcedure() {
     setProcedureNumber(event.target.value);
   }
 
-  function saveProcedure() {
-    const procedure = {
-      number: procedureNumber,
-      cpf,
-    };
+  async function saveProcedure() {
+    if (
+      procedureNumber.match(regex.number) &&
+      cpf.match(regex.cpf) &&
+      validateCPF(cpf)
+    ) {
+      const token = localStorage.getItem("accessToken");
+      const { id } = decodeJWT(token);
+      const procedure = {
+        number: procedureNumber,
+        cpf,
+        lawyer: id,
+      };
+      const response = await proceduresService.newProcedure(procedure);
+      if (response.status === 200) {
+        history.push("/procedures");
+      } else {
+        alert("Já existe um protocolo com esse número.");
+      }
+    } else {
+      alert("Por favor insira o número do protocolo e o cpf corretamente.");
+    }
   }
 
   return (
