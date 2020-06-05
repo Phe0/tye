@@ -6,6 +6,7 @@ import ProcedureFolder from "../../components/ProcedureFolder";
 import searchFunction from "../../utils/search";
 import proceduresService from "../../services/Procedures";
 import "./style.scss";
+import Empty from "../../components/Empty";
 
 export default function Procedures() {
   const [search, setSearch] = useState("");
@@ -52,16 +53,21 @@ export default function Procedures() {
             <NewButton to="/new-procedure" />
           </div>
         </article>
-        <section className="folders">
-          {filtered.map((procedure, index) => (
-            <ProcedureFolder
-              key={index}
-              id={procedure.id}
-              number={procedure.number}
-              cpf={procedure.cpf}
-            />
+        {procedures.length &&
+          (filtered.length ? (
+            <section className="folders">
+              {filtered.map((procedure, index) => (
+                <ProcedureFolder
+                  key={index}
+                  id={procedure.id}
+                  number={procedure.number}
+                  cpf={procedure.cpf}
+                />
+              ))}
+            </section>
+          ) : (
+            <Empty label="Nenhum Processo encontrado" />
           ))}
-        </section>
       </main>
     </div>
   );

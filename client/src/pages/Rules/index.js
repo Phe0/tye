@@ -1,126 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import SearchInput from "../../components/SearchInput";
 import NewButton from "../../components/NewButton";
 import RuleCard from "../../components/RuleCard";
 import searchFunction from "../../utils/search";
+import rulesService from "../../services/Rules";
 import "./style.scss";
-
-const rulesTest = [
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-  {
-    id: 1,
-    from: "Audiência conciliação designada - 01/02/2019 08:30",
-    to:
-      "A audiência de conciliação,forma amigável de resolver um processo, foi marcada. Ela será realizada no dia 01/02/19 às 08:30, no local indicado.",
-  },
-];
+import Empty from "../../components/Empty";
 
 export default function Procedures() {
   const [search, setSearch] = useState("");
-  const [rules, setRules] = useState(rulesTest);
-  const [filtered, setFiltered] = useState(rulesTest);
+  const [rules, setRules] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+
+  useEffect(() => {
+    getRules();
+  }, []);
+
+  async function getRules() {
+    const response = await rulesService.getRules();
+    setRules(response);
+    setFiltered(response);
+  }
 
   function handleChange(event) {
     setSearch(event.target.value);
@@ -151,11 +52,21 @@ export default function Procedures() {
           Regras permitem que pedaços de texto nos seus andamentos sejam
           substituídos, facilitando o entendimento dos seus clientes
         </p>
-        <section className="folders">
-          {filtered.map((rule, index) => (
-            <RuleCard key={index} from={rule.from} to={rule.to} id={rule.id} />
+        {rules.length &&
+          (filtered.length ? (
+            <section className="folders">
+              {filtered.map((rule, index) => (
+                <RuleCard
+                  key={index}
+                  from={rule.from}
+                  to={rule.to}
+                  id={rule.id}
+                />
+              ))}
+            </section>
+          ) : (
+            <Empty label="Nenhuma Regra encontrrada" />
           ))}
-        </section>
       </main>
     </div>
   );

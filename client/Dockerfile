@@ -1,5 +1,7 @@
 FROM node:latest
 
+RUN ls
+
 WORKDIR /client
 
 COPY ./ ./

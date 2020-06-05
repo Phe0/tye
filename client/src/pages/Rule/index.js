@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import BackIcon from "../../assets/backIcon";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
+import ruleService from "../../services/Rules";
 import "./style.scss";
 
-const rule = {
-  from: "Audiência conciliação designada - ${date} ${hour}",
-  to:
-    "A audiência de conciliação, forma amigável de resolver um processo, foi marcada. Ela será realizada no dia ${date} às ${hour}, no local indicado A audiência de conciliação, forma amigável de resolver um processo, foi marcada. Ela será realizada no dia ${date} às ${hour}, no local indicado A audiência de conciliação, forma amigável de resolver um processo, foi marcada. Ela será realizada no dia ${date} às ${hour}, no local indicado",
-  regex:
-    "Audiência conciliação designada - ((?:0?[1-9]|[12][0-9]|3[0-1])[/-](?:0?[1-9]|1[012])[/-](?:[0-2][0-9][0-9][0-9])) ((?:[0-1]?[0-9]|2[0-3]):[0-5][0-9])",
-};
-
 export default function Rule() {
+  const history = useHistory();
   const { id } = useParams();
+  const [rule, setRule] = useState();
+
+  useEffect(() => {
+    getRule();
+  }, []);
+
+  async function deleteRule() {
+    const response = await ruleService.deleteRule(id);
+    if (response.status === 200) {
+      alert("Regra deletada com sucesso");
+      history.push("/rules");
+    } else {
+      alert("Houve um erro ao criar essa regra");
+    }
+  }
+
+  async function getRule() {
+    const response = await ruleService.getRuleById(id);
+    setRule(response);
+  }
+
   return (
     <div className="container">
       <Header />
@@ -26,17 +41,26 @@ export default function Rule() {
             </div>
           </Link>
           <div className="intro__actions">
-            <button className="delete-btn bold bigger">Deletar</button>
+            <button
+              onClick={() => deleteRule()}
+              className="delete-btn bold bigger"
+            >
+              Deletar
+            </button>
           </div>
         </article>
-        <article className="rule__show">
-          <h3 className="bold">De</h3>
-          <p>{rule.from}</p>
-        </article>
-        <article className="rule__show">
-          <h3 className="bold">Para</h3>
-          <p>{rule.to}</p>
-        </article>
+        {rule && (
+          <div>
+            <article className="rule__show">
+              <h3 className="bold">De</h3>
+              <p>{rule.from}</p>
+            </article>
+            <article className="rule__show">
+              <h3 className="bold">Para</h3>
+              <p>{rule.to}</p>
+            </article>
+          </div>
+        )}
       </main>
     </div>
   );

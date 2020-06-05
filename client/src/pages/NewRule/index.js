@@ -1,16 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "../../components/Header";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import BackIcon from "../../assets/backIcon";
 import { toRegex } from "../../utils/translation";
+import rulesService from "../../services/Rules";
+import decodeJWT from "../../utils/decodeJWT";
 import "./style.scss";
 
 export default function NewRule() {
+  const history = useHistory();
   const fromInput = useRef(null);
   const toInput = useRef(null);
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [selected, setSelected] = useState("from");
+  const [lawyer, setLawyer] = useState();
 
   function handleChangeFrom(event) {
     setFrom(event.target.value);
@@ -30,18 +34,27 @@ export default function NewRule() {
     }
   }
 
-  function saveRule() {
+  async function saveRule() {
     if (!from.length || !to.length) {
       alert(
         "Os campos devem ser preenchidos para que você possa salvar uma nova regra."
       );
     } else {
+      const token = localStorage.getItem("accessToken");
+      const { id } = decodeJWT(token);
       const rule = {
         from: from,
         regex: toRegex(from),
         to: to,
+        lawyer: id,
       };
-      console.log(rule);
+      const response = await rulesService.newRule(rule);
+      if (response.status === 200) {
+        alert("Regra criada com sucesso");
+        history.push("/rules");
+      } else {
+        alert("Houve um erro ao criar essa regra");
+      }
     }
   }
 
@@ -57,7 +70,7 @@ export default function NewRule() {
             </div>
           </Link>
           <div className="intro__actions">
-            <button onClick={saveRule} className="save-btn bold bigger">
+            <button onClick={() => saveRule()} className="save-btn bold bigger">
               Salvar
             </button>
           </div>

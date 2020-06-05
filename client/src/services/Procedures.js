@@ -7,8 +7,13 @@ class ProceduresService {
   }
 
   async newProcedure(procedure) {
-    const response = await api.post("procedure", procedure);
+    const response = await api.post("/procedure", procedure);
     return response;
+  }
+
+  async getLawyer(id) {
+    const response = await api.get(`/procedure/getLawyer/${id}`);
+    return response.data;
   }
 }
 

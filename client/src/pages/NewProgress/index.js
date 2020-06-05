@@ -21,6 +21,7 @@ export default function NewProgress() {
       };
       const response = await progressService.newProgress(progress);
       if (response.status === 200) {
+        alert("Andamento criado com sucesso");
         history.push(`/procedure/${number}/${id}`);
       } else {
         alert("Houve um erro ao criar o andamento.");

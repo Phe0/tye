@@ -36,6 +36,7 @@ export default function NewProcedure() {
       };
       const response = await proceduresService.newProcedure(procedure);
       if (response.status === 200) {
+        alert("Processo criado com sucesso");
         history.push("/procedures");
       } else {
         alert("Já existe um protocolo com esse número.");

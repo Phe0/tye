@@ -8,6 +8,7 @@ import searchFunction from "../../utils/search";
 import ProgressCard from "../../components/ProgressCard";
 import progressService from "../../services/Progress";
 import { parseDate, parseHour } from "../../utils/parseTime";
+import Empty from "../../components/Empty";
 
 export default function Procedure() {
   const { number, id } = useParams();
@@ -61,19 +62,24 @@ export default function Procedure() {
           </div>
         </article>
         <p className="explanation bold">{number}</p>
-        <section className="folders">
-          {filtered.map((progress, index) => (
-            <ProgressCard
-              key={index}
-              date={parseDate(progress.createdAt)}
-              hour={parseHour(progress.createdAt)}
-              description={progress.description}
-              procedureId={id}
-              id={progress.id}
-              number={number}
-            />
+        {progresses.length &&
+          (filtered.length ? (
+            <section className="folders">
+              {filtered.map((progress, index) => (
+                <ProgressCard
+                  key={index}
+                  date={parseDate(progress.createdAt)}
+                  hour={parseHour(progress.createdAt)}
+                  description={progress.description}
+                  procedureId={id}
+                  id={progress.id}
+                  number={number}
+                />
+              ))}
+            </section>
+          ) : (
+            <Empty label="Nenhum andamento encontrado para esse processo" />
           ))}
-        </section>
       </main>
     </div>
   );

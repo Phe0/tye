@@ -3,30 +3,12 @@ import Header from "../../components/Header";
 import BackIcon from "../../assets/backIcon";
 import { Link, useParams } from "react-router-dom";
 import progressService from "../../services/Progress";
+import rulesService from "../../services/Rules";
+import procedureService from "../../services/Procedures";
 import "./style.scss";
 
 import { translate, findExpressions } from "../../utils/translation";
-import { parsedate, parseHour, parseDate } from "../../utils/parseTime";
-
-const rules = [
-  {
-    from: "Audiência conciliação designada - ${date} ${hour}",
-    to:
-      "A audiência de conciliação, forma amigável de resolver um processo, foi marcada. Ela será realizada no dia ${date} às ${hour}, no local indicado",
-    regex:
-      "Audiência conciliação designada - ((?:0?[1-9]|[12][0-9]|3[0-1])[/-](?:0?[1-9]|1[012])[/-](?:[0-2][0-9][0-9][0-9])) ((?:[0-1]?[0-9]|2[0-3]):[0-5][0-9])",
-  },
-  {
-    from: "Audiência instrução e julgamento designada - ${date} ${hour}",
-    to:
-      "Foi marcada uma audiência para as partes e testemunhas oferecerem seu depoimento pessoal sobre o caso. Nessa etapa do processo, o juiz também tenta conciliar as partes.",
-    regex:
-      "Audiência instrução e julgamento designada - ((?:0?[1-9]|[12][0-9]|3[0-1])[/-](?:0?[1-9]|1[012])[/-](?:[0-2][0-9][0-9][0-9])) ((?:[0-1]?[0-9]|2[0-3]):[0-5][0-9])",
-  },
-];
-
-// const description =
-//   "Audiência conciliação designada - 01/02/2020 08:30 Audiência instrução e julgamento designada - 10/12/2012 16:30 Audiência conciliação designada - 02/02/2020 08:00 Audiência instrução e julgamento designada - 11/12/2012 16:00";
+import { parseHour, parseDate } from "../../utils/parseTime";
 
 export default function Progress() {
   const [progress, setProgress] = useState();
@@ -41,6 +23,8 @@ export default function Progress() {
   async function setPage() {
     const progress = await progressService.getById(id);
     setProgress(progress);
+    const { lawyer } = await procedureService.getLawyer(procedureId);
+    const rules = await rulesService.getByLawyer(lawyer);
     const expressions = findExpressions(progress.description, rules);
     let translatedText = progress.description;
     const translations = [];
