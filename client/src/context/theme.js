@@ -15,9 +15,9 @@ export default function ThemeContextProvider({ children }) {
     <ThemeContext.Provider value={(theme, setTheme)}>
       <div className={`base ${theme === "dark" ? "dark" : ""}`}>
         {theme === "dark" ? (
-          <MoonIcon onClick={() => changeTheme("light")} />
+          <SunIcon onClick={() => changeTheme("light")} />
         ) : (
-          <SunIcon onClick={() => changeTheme("dark")} />
+          <MoonIcon onClick={() => changeTheme("dark")} />
         )}
         {children}
       </div>

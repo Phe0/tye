@@ -9,7 +9,7 @@ p.secondary {
   background-color: var(--color-delete);
 }
 
-:root {
+.dark {
   --color-background: #{$background--dark};
   --color-folder: #{$folderColor--dark};
   --color-logo: #{$logoColor--dark};
@@ -19,7 +19,7 @@ p.secondary {
   --color-delete: #{$delete--dark};
 }
 
-.dark {
+:root {
   --color-background: #{$background--light};
   --color-folder: #{$folderColor--light};
   --color-logo: #{$logoColor--light};
