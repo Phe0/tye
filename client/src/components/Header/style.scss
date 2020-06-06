@@ -16,7 +16,7 @@
     font-size: 18px;
     font-weight: 900;
     background-color: transparent;
-    color: $textColor;
+    color: var(--color-text);
     border: none;
     height: 32px;
     border-radius: 16px;
@@ -28,5 +28,5 @@
 }
 
 .selected {
-  background-color: $secondaryBackground;
+  background-color: var(--color-2-background);
 }

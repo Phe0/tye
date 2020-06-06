@@ -4,12 +4,11 @@
 .rule {
   &__input-area {
     & h3 {
-      color: $textColor;
+      color: var(--color-text);
       font-size: 36px;
       margin-bottom: 12px;
     }
     & p {
-      color: $secondaryText;
       font-size: 18px;
       margin-bottom: 24px;
     }
@@ -26,15 +25,15 @@
       padding: 12px;
       font-size: 16px;
       font-family: $main;
-      color: $background;
-      background-color: $folderColor;
+      color: var(--color-background);
+      background-color: var(--color-folder);
     }
   }
 }
 
 .variables {
   &__area {
-    background-color: $folderColor;
+    background-color: var(--color-folder);
     padding: 18px 10px;
     border-radius: 5px;
   }
@@ -45,8 +44,8 @@
     cursor: pointer;
     font-family: $main;
     font-size: 16px;
-    color: $background;
-    background-color: $logoColor;
+    color: var(--color-background);
+    background-color: var(--color-logo);
     padding: 1px 8px;
     border-radius: 2px;
     margin-right: 12px;

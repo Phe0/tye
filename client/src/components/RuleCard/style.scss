@@ -5,7 +5,7 @@
   height: 256px;
   padding: 10px;
   border-radius: 5px;
-  background-color: $folderColor;
+  background-color: var(--color-folder);
   overflow: hidden;
   margin-bottom: 16px;
 
@@ -15,5 +15,5 @@
 }
 
 p {
-  color: $background;
+  color: var(--color-background);
 }

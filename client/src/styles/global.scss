@@ -17,7 +17,7 @@ p {
 
 h1 {
   font-size: 48px;
-  color: $textColor;
+  color: var(--color-text);
   margin: 0;
 }
 
@@ -39,8 +39,34 @@ h1 {
   font-weight: bold;
 }
 
-html {
-  background-color: $background;
+body {
+  margin: 0;
+}
+
+.icon {
+  fill: var(--color-background);
+}
+
+.back-icon {
+  fill: var(--color-text);
+}
+
+.theme-icon {
+  fill: var(--color-folder);
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  cursor: pointer;
+}
+
+.base {
+  background-color: var(--color-background);
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
 }
 
 .container {
@@ -99,13 +125,12 @@ html {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $folderColor;
+  background: var(--color-folder);
   border-radius: 5px;
 }
 
 .explanation {
   font-size: 16px;
-  color: $secondaryText;
   margin-bottom: 24px;
 }
 
@@ -128,23 +153,22 @@ html {
 
 .save-btn {
   height: 32px;
-  background-color: $logoColor;
+  background-color: var(--color-logo);
   border: none;
   border-radius: 16px;
   padding: 0 36px;
   font-size: 18px;
-  color: $background;
+  color: var(--color-background);
   cursor: pointer;
 }
 
 .delete-btn {
   height: 32px;
-  background-color: $delete;
   border: none;
   border-radius: 16px;
   padding: 0 36px;
   font-size: 18px;
-  color: $background;
+  color: var(--color-background);
   cursor: pointer;
 }
 
@@ -152,16 +176,16 @@ textarea {
   width: 100%;
   height: 300px;
   border-radius: 5px;
-  background-color: $folderColor;
+  background-color: var(--color-folder);
   font-size: 16px;
   padding: 10px;
   box-sizing: border-box;
   font-family: $main;
-  color: $background;
+  color: var(--color-background);
 }
 
 .show-text {
-  background-color: $folderColor;
+  background-color: var(--color-folder);
   padding: 10px;
   border-radius: 5px;
 }

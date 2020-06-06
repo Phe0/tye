@@ -4,7 +4,7 @@
   display: inline-block;
   margin-bottom: 16px;
   &__tag {
-    background-color: $folderColor;
+    background-color: var(--color-folder);
     width: 52px;
     height: 18px;
     border-radius: 5px 5px 0 0;
@@ -13,7 +13,7 @@
   &__content {
     width: 192px;
     height: 129px;
-    background-color: $folderColor;
+    background-color: var(--color-folder);
     border-radius: 0 5px 5px 5px;
     padding: 10px;
 
@@ -23,7 +23,7 @@
 
     & p {
       margin: 0 0 10px 0;
-      color: $background;
+      color: var(--color-background);
       font-size: 14px;
     }
   }

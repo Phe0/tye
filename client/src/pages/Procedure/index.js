@@ -62,7 +62,7 @@ export default function Procedure() {
             <NewButton to={`/new-progress/${number}/${id}`} />
           </div>
         </article>
-        <p className="explanation bold">{number}</p>
+        <p className="explanation bold secondary">{number}</p>
         {filtered.length ? (
           <section className="folders">
             {filtered.map((progress, index) => (

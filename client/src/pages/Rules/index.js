@@ -47,7 +47,7 @@ export default function Procedures() {
             <NewButton to="/new-rule" />
           </div>
         </article>
-        <p className="explanation">
+        <p className="explanation secondary">
           Regras permitem que pedaços de texto nos seus andamentos sejam
           substituídos, facilitando o entendimento dos seus clientes
         </p>

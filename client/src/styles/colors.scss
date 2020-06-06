@@ -1,7 +1,30 @@
-$background: #1c2420;
-$folderColor: #cafde3;
-$logoColor: #89b255;
-$secondaryBackground: #3d5046;
-$textColor: #daf5e7;
-$secondaryText: #8aa395;
-$delete: #b54a68;
+@import "./dark-colors.scss";
+@import "./light-colors.scss";
+
+p.secondary {
+  color: var(--color-2-text);
+}
+
+.delete-btn {
+  background-color: var(--color-delete);
+}
+
+:root {
+  --color-background: #{$background--dark};
+  --color-folder: #{$folderColor--dark};
+  --color-logo: #{$logoColor--dark};
+  --color-2-background: #{$secondaryBackground--dark};
+  --color-text: #{$textColor--dark};
+  --color-2-text: #{$secondaryText--dark};
+  --color-delete: #{$delete--dark};
+}
+
+.dark {
+  --color-background: #{$background--light};
+  --color-folder: #{$folderColor--light};
+  --color-logo: #{$logoColor--light};
+  --color-2-background: #{$secondaryBackground--light};
+  --color-text: #{$textColor--light};
+  --color-2-text: #{$secondaryText--light};
+  --color-delete: #{$delete--light};
+}

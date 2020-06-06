@@ -77,7 +77,9 @@ export default function NewRule() {
         <section className="rule__form">
           <article className="rule__input-area">
             <h3 className="bold">Variáveis</h3>
-            <p>Escolha uma variável para inserir no texto.</p>
+            <p className="secondary">
+              Escolha uma variável para inserir no texto.
+            </p>
             <div className="variables__area">
               <button
                 onClick={() => insertVariable("date")}
@@ -107,7 +109,9 @@ export default function NewRule() {
           </article>
           <article className="rule__input-area">
             <h3 className="bold">De</h3>
-            <p>Os trechos de texto no formato abaixo serão alterados.</p>
+            <p className="secondary">
+              Os trechos de texto no formato abaixo serão alterados.
+            </p>
             <textarea
               type="text"
               value={from}
@@ -118,7 +122,7 @@ export default function NewRule() {
           </article>
           <article className="rule__input-area">
             <h3 className="bold">Para</h3>
-            <p>
+            <p className="secondary">
               Os trechos de texto acima serão alterados para o formato abaixo.
             </p>
             <textarea

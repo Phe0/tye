@@ -4,14 +4,14 @@
 .rule {
   &__show {
     & h3 {
-      color: $textColor;
+      color: var(--color-text);
       font-size: 36px;
       margin-bottom: 12px;
     }
 
     & p {
-      background-color: $folderColor;
-      color: $background;
+      background-color: var(--color-folder);
+      color: var(--color-background);
       font-size: 18px;
       padding: 10px;
       border-radius: 5px;

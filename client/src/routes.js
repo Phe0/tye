@@ -15,6 +15,8 @@ import NewRule from "./pages/NewRule";
 import Rule from "./pages/Rule";
 import isLawyer from "./utils/isLawyer";
 
+import ThemeContext from "./context/theme";
+
 function PrivateRoute({ component: Component, needsLawyer, ...rest }) {
   return (
     <Route
@@ -33,29 +35,31 @@ function PrivateRoute({ component: Component, needsLawyer, ...rest }) {
 
 export default function Routes() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Procedures} />
-        <PrivateRoute exact path="/rules" needsLawyer component={Rules} />
-        <PrivateRoute exact path="/procedures" component={Procedures} />
-        <PrivateRoute path="/procedure/:number/:id" component={Procedure} />
-        <PrivateRoute
-          needsLawyer
-          path="/new-progress/:number/:id"
-          component={NewProgress}
-        />
-        <PrivateRoute
-          path="/progress/:number/:procedureId/:id"
-          component={Progress}
-        />
-        <PrivateRoute
-          path="/new-procedure"
-          needsLawyer
-          component={NewProcedure}
-        />
-        <PrivateRoute path="/new-rule" needsLawyer component={NewRule} />
-        <PrivateRoute path="/rule/:id" component={Rule} />
-      </Switch>
-    </Router>
+    <ThemeContext>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Procedures} />
+          <PrivateRoute exact path="/rules" needsLawyer component={Rules} />
+          <PrivateRoute exact path="/procedures" component={Procedures} />
+          <PrivateRoute path="/procedure/:number/:id" component={Procedure} />
+          <PrivateRoute
+            needsLawyer
+            path="/new-progress/:number/:id"
+            component={NewProgress}
+          />
+          <PrivateRoute
+            path="/progress/:number/:procedureId/:id"
+            component={Progress}
+          />
+          <PrivateRoute
+            path="/new-procedure"
+            needsLawyer
+            component={NewProcedure}
+          />
+          <PrivateRoute path="/new-rule" needsLawyer component={NewRule} />
+          <PrivateRoute path="/rule/:id" needsLawyer component={Rule} />
+        </Switch>
+      </Router>
+    </ThemeContext>
   );
 }
