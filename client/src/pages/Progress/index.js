@@ -17,35 +17,36 @@ export default function Progress() {
   const { number, procedureId, id } = useParams();
 
   useEffect(() => {
-    setPage();
-  }, []);
-
-  async function setPage() {
-    const progress = await progressService.getById(id);
-    setProgress(progress);
-    const { lawyer } = await procedureService.getLawyer(procedureId);
-    const rules = await rulesService.getByLawyer(lawyer);
-    const expressions = findExpressions(progress.description, rules);
-    let translatedText = progress.description;
-    const translations = [];
-    expressions.forEach((expression) => {
-      if (expression.expressions) {
-        expression.expressions.forEach((foundText) => {
-          translations.push({
-            original: foundText,
-            translated: translate(foundText, expression.rule),
+    async function setPage() {
+      const progress = await progressService.getById(id);
+      setProgress(progress);
+      const { lawyer } = await procedureService.getLawyer(procedureId);
+      const rules = await rulesService.getByLawyer(lawyer);
+      const expressions = findExpressions(progress.description, rules);
+      let translatedText = progress.description;
+      const translations = [];
+      expressions.forEach((expression) => {
+        if (expression.expressions) {
+          expression.expressions.forEach((foundText) => {
+            translations.push({
+              original: foundText,
+              translated: translate(foundText, expression.rule),
+            });
           });
-        });
-      }
-    });
-    translations.forEach((translation) => {
-      translatedText = translatedText.replace(
-        translation.original,
-        translation.translated
-      );
-    });
-    setTranslation(translatedText);
-  }
+        }
+      });
+      translations.forEach((translation) => {
+        translatedText = translatedText.replace(
+          translation.original,
+          translation.translated
+        );
+      });
+      setTranslation(translatedText);
+    }
+
+    setPage();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="container">

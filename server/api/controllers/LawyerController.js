@@ -23,7 +23,7 @@ module.exports = {
           });
       })
       .catch(() => {
-        return res.status(401).json({ error: "Usuário não encontrado" });
+        return res.status(400).json({ error: "Usuário não encontrado" });
       });
   },
   signin: function (req, res) {

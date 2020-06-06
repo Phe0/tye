@@ -1,13 +1,13 @@
 FROM node:latest
 
-RUN ls
+RUN mkdir -p /react-app
+WORKDIR /react-app
 
-WORKDIR /client
-
-COPY ./ ./
+COPY package.json /react-app
+COPY package-lock.json /react-app
 
 RUN npm install
 
-EXPOSE 3000
+COPY . /react-app
 
 CMD ["npm", "start"]

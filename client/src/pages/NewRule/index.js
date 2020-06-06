@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Header from "../../components/Header";
 import { Link, useHistory } from "react-router-dom";
 import BackIcon from "../../assets/backIcon";
@@ -14,7 +14,6 @@ export default function NewRule() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [selected, setSelected] = useState("from");
-  const [lawyer, setLawyer] = useState();
 
   function handleChangeFrom(event) {
     setFrom(event.target.value);

@@ -11,11 +11,16 @@ module.exports = {
       type: "string",
       required: true,
       regex: /[0-9]{20}/,
+      unique: true,
     },
     cpf: {
       type: "string",
       required: true,
       regex: /[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}/,
+    },
+    lawyer: {
+      model: "lawyer",
+      required: true,
     },
   },
 };

@@ -1,11 +1,14 @@
 FROM node:latest
 
-WORKDIR /server
+RUN mkdir -p /backend
+WORKDIR /backend
+
+COPY package.json /backend
+COPY package-lock.json /backend
 
 RUN npm install -g sails
-
-COPY ./ ./
-
 RUN npm install
 
-CMD ["node", "server/app.js"]
+COPY . /backend
+
+CMD ["sails", "lift"]

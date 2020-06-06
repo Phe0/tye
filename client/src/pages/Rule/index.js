@@ -11,7 +11,13 @@ export default function Rule() {
   const [rule, setRule] = useState();
 
   useEffect(() => {
+    async function getRule() {
+      const response = await ruleService.getRuleById(id);
+      setRule(response);
+    }
+
     getRule();
+    // eslint-disable-next-line
   }, []);
 
   async function deleteRule() {
@@ -22,11 +28,6 @@ export default function Rule() {
     } else {
       alert("Houve um erro ao criar essa regra");
     }
-  }
-
-  async function getRule() {
-    const response = await ruleService.getRuleById(id);
-    setRule(response);
   }
 
   return (

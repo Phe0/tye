@@ -9,8 +9,11 @@
  */
 
 module.exports.routes = {
-  "POST /api/user/login": "UserController.login",
-  "POST /api/lawyer/login": "LawyerController.login",
-  "POST /api/user/signin": "UserController.signin",
-  "POST /api/lawyer/signin": "LawyerController.signin",
+  "POST /user/login": "UserController.login",
+  "POST /lawyer/login": "LawyerController.login",
+  "POST /user/signin": "UserController.signin",
+  "POST /lawyer/signin": "LawyerController.signin",
+  "GET /progress/getByProcedure/:id": "ProgressController.getByProcedure",
+  "GET /rule/getByLawyer/:id": "RuleController.getByLawyer",
+  "GET /procedure/getLawyer/:id": "ProcedureController.getLawyer",
 };

@@ -14,14 +14,13 @@ export default function Procedures() {
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
+    async function getRules() {
+      const response = await rulesService.getRules();
+      setRules(response);
+      setFiltered(response);
+    }
     getRules();
   }, []);
-
-  async function getRules() {
-    const response = await rulesService.getRules();
-    setRules(response);
-    setFiltered(response);
-  }
 
   function handleChange(event) {
     setSearch(event.target.value);

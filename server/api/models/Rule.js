@@ -7,16 +7,20 @@
 
 module.exports = {
   attributes: {
-    original: {
+    from: {
       type: "string",
       required: true,
     },
-    literal: {
+    to: {
       type: "string",
       required: true,
     },
     regex: {
       type: "string",
+      required: true,
+    },
+    lawyer: {
+      model: "lawyer",
       required: true,
     },
   },

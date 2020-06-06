@@ -17,19 +17,20 @@ export default function Procedure() {
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
-    getProgress();
-  }, []);
+    async function getProgress() {
+      const progressArray = await progressService.getByProcedure(id);
+      progressArray.sort((a, b) => {
+        if (a.createdAt > b.createdAt) return -1;
+        if (a.createdAt < b.createdAt) return 1;
+        return 0;
+      });
+      setProgresses(progressArray);
+      setFiltered(progressArray);
+    }
 
-  async function getProgress() {
-    const progressArray = await progressService.getByProcedure(id);
-    progressArray.sort((a, b) => {
-      if (a.createdAt > b.createdAt) return -1;
-      if (a.createdAt < b.createdAt) return 1;
-      return 0;
-    });
-    setProgresses(progressArray);
-    setFiltered(progressArray);
-  }
+    getProgress();
+    // eslint-disable-next-line
+  }, []);
 
   function handleChange(event) {
     setSearch(event.target.value);

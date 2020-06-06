@@ -14,19 +14,19 @@ export default function Procedures() {
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
+    async function getProcedures() {
+      const proceduresArray = await proceduresService.getProcedures();
+      proceduresArray.sort((a, b) => {
+        if (a.createdAt > b.createdAt) return -1;
+        if (a.createdAt < b.createdAt) return 1;
+        return 0;
+      });
+      setProcedures(proceduresArray);
+      setFiltered(proceduresArray);
+    }
+
     getProcedures();
   }, []);
-
-  async function getProcedures() {
-    const proceduresArray = await proceduresService.getProcedures();
-    proceduresArray.sort((a, b) => {
-      if (a.createdAt > b.createdAt) return -1;
-      if (a.createdAt < b.createdAt) return 1;
-      return 0;
-    });
-    setProcedures(proceduresArray);
-    setFiltered(proceduresArray);
-  }
 
   function handleChange(event) {
     setSearch(event.target.value);
@@ -53,21 +53,20 @@ export default function Procedures() {
             <NewButton to="/new-procedure" />
           </div>
         </article>
-        {procedures.length &&
-          (filtered.length ? (
-            <section className="folders">
-              {filtered.map((procedure, index) => (
-                <ProcedureFolder
-                  key={index}
-                  id={procedure.id}
-                  number={procedure.number}
-                  cpf={procedure.cpf}
-                />
-              ))}
-            </section>
-          ) : (
-            <Empty label="Nenhum Processo encontrado" />
-          ))}
+        {filtered.length ? (
+          <section className="folders">
+            {filtered.map((procedure, index) => (
+              <ProcedureFolder
+                key={index}
+                id={procedure.id}
+                number={procedure.number}
+                cpf={procedure.cpf}
+              />
+            ))}
+          </section>
+        ) : (
+          <Empty label="Nenhum Processo encontrado" />
+        )}
       </main>
     </div>
   );
