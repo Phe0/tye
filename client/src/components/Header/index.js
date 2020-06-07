@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./style.scss";
 import isLawyer from "../../utils/isLawyer";
-import MoonIcon from "../../assets/moonIcon";
 
 export default function Header() {
   let location = useLocation();

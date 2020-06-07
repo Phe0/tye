@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
-import "./style.scss";
 import InputMask from "react-input-mask";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import BackIcon from "../../assets/backIcon";
 import regex from "../../utils/regex";
 import loginService from "../../services/Login";
 
-export default function Login() {
+export default function Signin() {
   const history = useHistory();
   const [role, setRole] = useState("user");
   const [cpf, setCpf] = useState("");
@@ -15,51 +16,6 @@ export default function Login() {
 
   function handleSelect(value) {
     setRole(value);
-  }
-
-  async function login() {
-    if (role === "user") {
-      if (cpf.match(regex.cpfLiteral) && password.length) {
-        const user = {
-          cpf,
-          password,
-        };
-        try {
-          const response = await loginService.userLogin(user);
-          if (response.status === 200) {
-            localStorage.setItem("accessToken", response.data.token);
-            history.push("/procedures");
-          } else {
-            alert("CPF ou senha incorretos");
-          }
-        } catch {
-          alert("CPF ou senha incorretos");
-        }
-      } else {
-        alert("Por favor, insira o cpf e a senha corretamente.");
-      }
-    }
-    if (role === "lawyer") {
-      if (email.match(regex.email) && password.length) {
-        const lawyer = {
-          email,
-          password,
-        };
-        try {
-          const response = await loginService.lawyerLogin(lawyer);
-          if (response.status === 200) {
-            localStorage.setItem("accessToken", response.data.token);
-            history.push("/procedures");
-          } else {
-            alert("Email ou senha incorretos");
-          }
-        } catch {
-          alert("Email ou senha incorretos");
-        }
-      } else {
-        alert("Por favor, insira o email e a senha corretamente.");
-      }
-    }
   }
 
   function changeCPF(event) {
@@ -74,21 +30,65 @@ export default function Login() {
     setPassword(event.target.value);
   }
 
-  function signin() {
-    history.push("/signin");
+  async function signin() {
+    if (role === "user") {
+      if (cpf.match(regex.cpfLiteral) && password.length) {
+        const user = {
+          cpf,
+          password,
+        };
+        try {
+          const response = await loginService.userSignin(user);
+          if (response.status === 200) {
+            localStorage.setItem("accessToken", response.data.token);
+            history.push("/procedures");
+          } else {
+            alert("Já existe um cadastro com esse CPF.");
+          }
+        } catch {
+          alert("Já existe um cadastro com esse CPF.");
+        }
+      } else {
+        alert("Por favor, insira o cpf e a senha corretamente.");
+      }
+    }
+    if (role === "lawyer") {
+      if (email.match(regex.email) && password.length) {
+        const lawyer = {
+          email,
+          password,
+        };
+        try {
+          const response = await loginService.lawyerSignin(lawyer);
+          console.log(response.status);
+          if (response.status === 200) {
+            localStorage.setItem("accessToken", response.data.token);
+            history.push("/procedures");
+          } else {
+            alert("Já existe um cadastro com esse Email.");
+          }
+        } catch (e) {
+          alert("Já existe um cadastro com esse Email.");
+        }
+      } else {
+        alert("Por favor, insira o email e a senha corretamente.");
+      }
+    }
   }
 
   return (
     <div className="container">
       <Header />
       <article className="intro">
-        <h1>Login do {role === "lawyer" ? "Advogado" : "Cliente"}</h1>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <div className="back">
+            <BackIcon color="#DAF5E7" />
+            <h1>Criar conta de {role === "lawyer" ? "Advogado" : "Cliente"}</h1>
+          </div>
+        </Link>
         <div className="intro__actions">
-          <button className="new-btn bold bigger" onClick={() => signin()}>
+          <button className="save-btn bold bigger" onClick={() => signin()}>
             Criar conta
-          </button>
-          <button className="save-btn bold bigger" onClick={() => login()}>
-            Entrar
           </button>
         </div>
       </article>

@@ -10,6 +10,16 @@ class LoginService {
     const response = await api.post("/lawyer/login", lawyer);
     return response;
   }
+
+  async userSignin(user) {
+    const response = await api.post("/user/signin", user);
+    return response;
+  }
+
+  async lawyerSignin(lawyer) {
+    const response = await api.post("/lawyer/signin", lawyer);
+    return response;
+  }
 }
 
 const loginService = new LoginService();

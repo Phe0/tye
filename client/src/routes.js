@@ -15,6 +15,7 @@ import NewRule from "./pages/NewRule";
 import Rule from "./pages/Rule";
 import isLawyer from "./utils/isLawyer";
 import Login from "./pages/Login";
+import Signin from "./pages/Signin";
 
 import ThemeContext from "./context/theme";
 
@@ -40,6 +41,7 @@ export default function Routes() {
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
+          <Route exact path="/signin" component={Signin} />
           <PrivateRoute exact path="/rules" needsLawyer component={Rules} />
           <PrivateRoute exact path="/procedures" component={Procedures} />
           <PrivateRoute path="/procedure/:number/:id" component={Procedure} />
