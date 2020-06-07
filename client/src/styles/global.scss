@@ -161,9 +161,22 @@ body {
   background-color: var(--color-logo);
   border: none;
   border-radius: 16px;
-  padding: 0 36px;
+  padding: 0 12px;
+  margin-left: 12px;
   font-size: 18px;
   color: var(--color-background);
+  cursor: pointer;
+}
+
+.new-btn {
+  height: 32px;
+  background-color: var(--color-2-background);
+  border: none;
+  border-radius: 16px;
+  padding: 0 12px;
+  margin-left: 12px;
+  font-size: 18px;
+  color: var(--color-text);
   cursor: pointer;
 }
 
