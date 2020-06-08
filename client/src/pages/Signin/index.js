@@ -60,7 +60,6 @@ export default function Signin() {
         };
         try {
           const response = await loginService.lawyerSignin(lawyer);
-          console.log(response.status);
           if (response.status === 200) {
             localStorage.setItem("accessToken", response.data.token);
             history.push("/procedures");

@@ -23,10 +23,8 @@ module.exports = {
     } else {
       searchObject = { cpf: req.user.cpf };
     }
-    console.log(searchObject);
     Procedure.find(searchObject)
       .then((procedures) => {
-        console.log(procedures);
         return res.status(200).json(procedures);
       })
       .catch((error) => {
