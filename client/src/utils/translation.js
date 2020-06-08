@@ -47,12 +47,15 @@ function translate(original, rule) {
 }
 
 function findExpressions(text, rules) {
-  const expressions = rules.map((rule) => {
-    return {
-      rule,
-      expressions: text.match(new RegExp(rule.regex, "g")),
-    };
+  let expressions = rules.map((rule) => {
+    if (text.match(new RegExp(rule.regex, "g"))) {
+      return {
+        rule,
+        expressions: text.match(new RegExp(rule.regex, "g")),
+      };
+    } else return null;
   });
+  expressions = expressions.filter((expression) => expression !== null);
   return expressions;
 }
 

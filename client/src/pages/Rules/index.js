@@ -51,21 +51,20 @@ export default function Procedures() {
           Regras permitem que pedaços de texto nos seus andamentos sejam
           substituídos, facilitando o entendimento dos seus clientes
         </p>
-        {rules.length &&
-          (filtered.length ? (
-            <section className="folders">
-              {filtered.map((rule, index) => (
-                <RuleCard
-                  key={index}
-                  from={rule.from}
-                  to={rule.to}
-                  id={rule.id}
-                />
-              ))}
-            </section>
-          ) : (
-            <Empty label="Nenhuma Regra encontrrada" />
-          ))}
+        {filtered.length ? (
+          <section className="folders">
+            {filtered.map((rule, index) => (
+              <RuleCard
+                key={index}
+                from={rule.from}
+                to={rule.to}
+                id={rule.id}
+              />
+            ))}
+          </section>
+        ) : (
+          <Empty label="Nenhuma Regra encontrrada" />
+        )}
       </main>
     </div>
   );
