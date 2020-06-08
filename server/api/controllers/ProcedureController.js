@@ -15,4 +15,22 @@ module.exports = {
         return res.status(400).json(error);
       });
   },
+
+  find: function (req, res) {
+    let searchObject;
+    if (req.user.email) {
+      searchObject = { lawyer: req.user.id };
+    } else {
+      searchObject = { cpf: req.user.cpf };
+    }
+    console.log(searchObject);
+    Procedure.find(searchObject)
+      .then((procedures) => {
+        console.log(procedures);
+        return res.status(200).json(procedures);
+      })
+      .catch((error) => {
+        return res.status(400).json(error);
+      });
+  },
 };
