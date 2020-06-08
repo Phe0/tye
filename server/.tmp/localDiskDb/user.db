@@ -1,0 +1,3 @@
+{"$$indexCreated":{"fieldName":"id","unique":true,"sparse":false}}
+{"$$indexCreated":{"fieldName":"cpf","unique":true,"sparse":false}}
+{"cpf":"765.094.140-07","password":"$2b$08$mGis8GOp1F1Su/UXRvLos.ZphUfSRjPbvvQo/7CGx.LPJRyKe5pQS","createdAt":1591631688311,"updatedAt":1591631688311,"id":1,"_id":1}
