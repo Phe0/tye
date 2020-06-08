@@ -39,11 +39,16 @@
   }
   .navigation {
     margin-top: 24px;
+    box-sizing: border-box;
     flex-wrap: nowrap;
     justify-content: space-between;
+    width: 100%;
+    overflow-x: auto;
+    padding: 12px;
 
     &__button {
       margin: 0;
+      margin-right: 12px;
     }
   }
 }

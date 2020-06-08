@@ -77,6 +77,7 @@ body {
 .container {
   margin: auto;
   width: 80vw;
+  padding-bottom: 24px;
 }
 
 .intro {
@@ -126,12 +127,13 @@ body {
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 6px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--color-folder);
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .explanation {
@@ -174,7 +176,6 @@ body {
   border: none;
   border-radius: 16px;
   padding: 0 12px;
-  margin-left: 12px;
   font-size: 18px;
   color: var(--color-text);
   cursor: pointer;
