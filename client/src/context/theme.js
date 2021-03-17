@@ -1,13 +1,22 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import MoonIcon from "../assets/moonIcon";
 import SunIcon from "../assets/sunIcon";
 
 export const ThemeContext = createContext();
 
 export default function ThemeContextProvider({ children }) {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const value = localStorage.getItem("theme");
+    console.log(value);
+    if (value === "dark" || value === "light") {
+      setTheme(value);
+    }
+  }, []);
 
   function changeTheme(value) {
+    localStorage.setItem("theme", value);
     setTheme(value);
   }
 
